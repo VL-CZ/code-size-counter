@@ -1,19 +1,28 @@
-import sys
-
-from file_tools import inspect_directory
 from argparse import ArgumentParser
+from file_tools import inspect_directory
 
 
 def format_to_kilobytes(total_bytes):
+    """
+    convert the given number of bytes to kilobytes and round to 2 decimal digits
+
+    :param total_bytes: number of bytes to convert and format
+    :return: converted kilobytes rounded to 2 decimal digits
+    """
     kilobytes = total_bytes / 1024
     return round(kilobytes, 2)
 
 
 def config_args():
+    """
+    configure the command line arguments of the program
+
+    :return: parsed script arguments
+    """
     parser = ArgumentParser(description='Calculate the total size (both kB and lines of code) of program\'s code.')
-    parser.add_argument('--folder', type=str, required=True)
-    parser.add_argument('--extension', type=str, required=True)
-    parser.add_argument('--trace', default=False, action='store_true')
+    parser.add_argument('-f', '--folder', type=str, required=True)
+    parser.add_argument('-e', '--extension', type=str, required=True)
+    parser.add_argument('-t', '--trace', default=False, action='store_true')
     return parser.parse_args()
 
 
