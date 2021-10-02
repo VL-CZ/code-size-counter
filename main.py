@@ -23,6 +23,7 @@ def config_args():
     parser.add_argument('-f', '--folder', type=str, required=True)
     parser.add_argument('-e', '--extension', type=str, required=True)
     parser.add_argument('-t', '--trace', default=False, action='store_true')
+    parser.add_argument('-x', '--exclude', type=str)
     return parser.parse_args()
 
 
@@ -30,7 +31,7 @@ def main():
     args = config_args()
 
     file_extension = args.extension
-    directory_path = args.folder.replace('\\', '/')
+    directory_path = args.folder
 
     directory_size = inspect_directory(directory_path, file_extension, args.trace)
     print(f'Total size of .{file_extension} files: {format_to_kilobytes(directory_size.size)} kB')

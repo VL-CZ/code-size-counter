@@ -71,7 +71,13 @@ def inspect_directory(directory, file_extension, debug_prints):
         total_lines += file_manager.get_lines_count()
 
         if debug_prints:
-            file_path = file_path.replace('\\', '/')
-            print(f'{file_path} processed')
+            print(f'{get_path_with_slashes(file_path)} processed')
 
     return FileSystemNodeInfo(total_size, total_lines)
+
+
+def get_path_with_slashes(path):
+    """
+    get path using forward slashes (e.g. replace back-slash by forward slash on Windows)
+    """
+    return path.replace('\\', '/')
