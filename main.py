@@ -4,15 +4,27 @@ from argparse import ArgumentParser
 from file_tools import FileSetInfo, FileManager, get_path_with_slashes
 
 
-class DirectoryInspector:
+class CodeSizeCounter:
+    """
+    class responsible for computing the source code size
+    """
 
     def __init__(self, directory, file_extension, debug_prints, excluded_items):
+        """
+        :param directory: the directory to inspect
+        :param file_extension: extension of the files that we're looking for
+        :param debug_prints: should the program print debug prints? (e.g. 'file XXX processed)
+        :param excluded_items: directories & files to exclude
+        """
         self._directory = directory
         self._file_extension = file_extension
         self._debug_prints = debug_prints
         self._excluded_items = excluded_items
 
     def inspect(self):
+        """
+        inspect the given directory and count lines & size of all files with the given file extension
+        """
         return self._inspect(self._directory)
 
     def _inspect(self, directory):
@@ -50,6 +62,11 @@ class DirectoryInspector:
         return file_set_info
 
     def _is_excluded(self, path):
+        """
+        check if the directory/file is excluded from the code size calculation
+        :param path: path of the directory/file to check
+        :return:
+        """
         return any(os.path.samefile(path, ex) for ex in self._excluded_items)
 
 
@@ -83,7 +100,7 @@ def main():
     file_extension = args.extension
     excluded_items = tuple(map(lambda ex: os.path.join(args.directory, ex), args.exclude))
 
-    dir_insp = DirectoryInspector(args.directory, file_extension, args.log, excluded_items)
+    dir_insp = CodeSizeCounter(args.directory, file_extension, args.log, excluded_items)
     code_size = dir_insp.inspect()
 
     print('=' * 60)

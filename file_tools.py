@@ -3,21 +3,42 @@ import os
 
 class FileSetInfo:
     """
-    class representing size and lines count of the set of files
+    class representing
+     - total size
+     - total lines count
+     - number of files
+     of a set of files
     """
 
     def __init__(self, total_size, total_lines, total_files):
+        """
+        :param total_size: total size of all files in the set (in bytes)
+        :param total_lines: total lines of code of all files in the set
+        :param total_files: number of files in the set
+        """
         self.total_size = total_size
         self.total_lines = total_lines
         self.total_files = total_files
 
     def add(self, file_set_info):
+        """
+        add file_set_info to the current object
+
+        e.g. sum the corresponding fields
+
+        :param file_set_info:
+        """
         self.total_files += file_set_info.total_files
         self.total_lines += file_set_info.total_lines
         self.total_size += file_set_info.total_size
 
     @staticmethod
     def empty():
+        """
+        create empty instance of :class: FileSetInfo
+
+        :return:
+        """
         return FileSetInfo(0, 0, 0)
 
 
