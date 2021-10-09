@@ -1,7 +1,7 @@
 import os
 
 
-class FileSetInfo:
+class FileSetSize:
     """
     class representing
      - total size
@@ -20,26 +20,26 @@ class FileSetInfo:
         self.total_lines = total_lines
         self.total_files = total_files
 
-    def add(self, file_set_info):
+    def add(self, file_set_size):
         """
         add file_set_info to the current object
 
         e.g. sum the corresponding fields
 
-        :param file_set_info:
+        :param file_set_size:
         """
-        self.total_files += file_set_info.total_files
-        self.total_lines += file_set_info.total_lines
-        self.total_size += file_set_info.total_size
+        self.total_files += file_set_size.total_files
+        self.total_lines += file_set_size.total_lines
+        self.total_size += file_set_size.total_size
 
     @staticmethod
     def empty():
         """
-        create empty instance of :class: FileSetInfo
+        create empty instance of class FileSetSizeInfo
 
         :return:
         """
-        return FileSetInfo(0, 0, 0)
+        return FileSetSize(0, 0, 0)
 
 
 class FileManager:
@@ -63,7 +63,15 @@ class FileManager:
         with open(self.file_path, 'r') as file:
             return sum(1 for _ in file)
 
-    def has_extension(self, extension):
+    def has_one_of_extensions(self, extensions):
+        """
+        check if the file has one of the extensions
+
+        :param extensions: collection of expected extensions
+        """
+        return any(self._has_extension(e) for e in extensions)
+
+    def _has_extension(self, extension):
         """
         check if the file has given file extension (e.g. '.py')
 
