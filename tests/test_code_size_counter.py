@@ -1,5 +1,6 @@
 import os
 import unittest
+from pathlib import Path
 
 from src.code_size_counter import CodeSizeCounter
 
@@ -17,7 +18,7 @@ class TestCodeSizeCounter(unittest.TestCase):
 
 
 def _get_tests_dir():
-    return os.path.join(__file__, '..')
+    return Path(__file__).parent.absolute()
 
 
 if __name__ == '__main__':
