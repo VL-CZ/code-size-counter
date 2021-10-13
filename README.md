@@ -5,7 +5,7 @@ kB and lines of code) of program's code.
 ## Introduction
 The main goal of this program is to calculate total size of a source code.
 You need to specify the directory that contains the source code and file extension(s) of the source code files. You can set multiple file extensions
-(for example .html, .css and .js). 
+(for example `html`, `css` and `js`). 
 The script then searches the directory for files with the given file extension. You can also exclude selected subdirectories from the search
 (this is especially useful for directories like `.venv`, `.git` and so on).
 The program typically prints:
@@ -31,12 +31,12 @@ Calculate the total size (both kB and lines of code) of program's code.
 optional arguments:
   -h, --help            show this help message and exit
   -d DIRECTORY, --directory DIRECTORY
-                        The directory where to search files
+                        Path to the directory where to search files. The path can be either absolute or relative.
   -e EXTENSION [EXTENSION ...], --extension EXTENSION [EXTENSION ...]
-                        extensions of the files that we're searching (separated by spaces)
+                        extensions of the files that we're searching (separated by spaces). Do not prefix them with a dot (e.g. use "py" instead of ".py")
   -l, --log             If present, the program prints its progress (e.g. 'file XXX processed')
   -x EXCLUDE [EXCLUDE ...], --exclude EXCLUDE [EXCLUDE ...]
-                        paths to directories & files (separated by spaces) to exclude from search. These paths are relative to the given directory (-d parameter).
+                        path to directories & files to exclude (separated by spaces). These paths are relative to the given directory (-d parameter)     
   -p {kb_size,lines,files}, --print {kb_size,lines,files}
                         Print just the selected value (kB size, total files or lines of code)
 ```
