@@ -32,10 +32,17 @@ def config_args():
     :return: parsed script arguments
     """
     parser = ArgumentParser(description='Calculate the total size (both kB and lines of code) of program\'s code.')
-    parser.add_argument('-d', '--directory', type=str, required=True)
-    parser.add_argument('-e', '--extension', nargs='+', required=True, default=[])
-    parser.add_argument('-l', '--log', default=False, action='store_true')
-    parser.add_argument('-x', '--exclude', nargs='+', default=[])
+    parser.add_argument('-d', '--directory', type=str, required=True,
+                        help='The directory where to search files')
+    parser.add_argument('-e', '--extension', nargs='+', required=True, default=[],
+                        help='extensions of the files that we\'re searching')
+    parser.add_argument('-l', '--log', default=False, action='store_true',
+                        help='If present, the program prints its progress (e.g. \'file XXX processed\')')
+    parser.add_argument('-x', '--exclude', nargs='+', default=[],
+                        help='path to directories & files to exclude. This path is relative to the given directory '
+                             '(-d parameter)')
+    parser.add_argument('-p', '--print', choices=['kb_size', 'lines', 'files'],
+                        help='Print just the selected criteria (kB size, total files or lines of code)')
     return parser.parse_args()
 
 
@@ -47,11 +54,21 @@ def main():
     code_size_counter = CodeSizeCounter(args.directory, file_extensions, args.log, excluded_items)
     code_size = code_size_counter.calculate_size()
 
-    print('=' * 60)
-    print(f'Total {format_extensions(file_extensions)} files: {code_size.total_files}')
-    print(f'Total size of {format_extensions(file_extensions)} files: {format_to_kilobytes(code_size.total_size)} kB')
-    print(f'Total lines of code: {code_size.total_lines}')
-    print('=' * 60)
+    what_to_print = args.print
+    if what_to_print == 'kb_size':
+        print(format_to_kilobytes(code_size.total_size))
+    elif what_to_print == 'lines':
+        print(code_size.total_lines)
+    elif what_to_print == 'files':
+        print(code_size.total_files)
+    else:
+        # print all
+        print('=' * 60)
+        print(f'Total {format_extensions(file_extensions)} files: {code_size.total_files}')
+        print(
+            f'Total size of {format_extensions(file_extensions)} files: {format_to_kilobytes(code_size.total_size)} kB')
+        print(f'Total lines of code: {code_size.total_lines}')
+        print('=' * 60)
 
 
 if __name__ == '__main__':

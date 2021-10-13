@@ -11,14 +11,16 @@ class CodeSizeCounter:
     def __init__(self, directory, file_extensions, print_logs, excluded_items):
         """
         :param directory: the directory where to search files
-        :param file_extensions: extension of the files that we're searching
-        :param print_logs: should the program print its progress? (e.g. 'file XXX processed)
+        :param file_extensions: extensions of the files that we're searching
+        :param print_logs: should the program print its progress? (e.g. 'file XXX processed')
         :param excluded_items: absolute path to directories & files to exclude
         """
         self._directory = directory
         self._file_extensions = file_extensions
         self._print_logs = print_logs
         self._excluded_items = excluded_items
+
+        self._check_if_paths_exist()
 
     def calculate_size(self):
         """
@@ -69,3 +71,16 @@ class CodeSizeCounter:
         :param path: path of the directory/file to check
         """
         return any(os.path.samefile(path, ex) for ex in self._excluded_items)
+
+    def _check_if_paths_exist(self):
+        """
+        check if paths to the selected directory and excluded items are valid
+        """
+        all_paths = self._excluded_items + (self._directory,)
+        all_paths_exist = all(os.path.exists(path) for path in all_paths)
+        if not all_paths_exist:
+            invalid_paths = map(
+                get_path_with_slashes,
+                filter(lambda path: not os.path.exists(path), all_paths)
+            )
+            raise FileNotFoundError(f'The following paths are not valid {list(invalid_paths)}')
