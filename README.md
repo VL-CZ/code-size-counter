@@ -2,14 +2,26 @@
 This repository contains a simple command line script used for calculating total size (both 
 kB and lines of code) of program's code.
 
+## Introduction
+The main goal of this program is to calculate total size of a source code.
+You need to specify the directory that contains the source code and file extension(s) of the source code files. You can set multiple file extensions
+(for example .html, .css and .js). 
+The script then searches the directory for files with the given file extension. You can also exclude selected subdirectories from the search
+(this is especially useful for directories like `.venv`, `.git` and so on).
+The program typically prints:
+- number of files found
+- total number of lines in these files (newline at the end of the file isn't counted)
+- total size of these files in kB (rounded to 2 decimal places)
+
+See the usage section for further details.
+
 ## Requirements
 - Python version 3. If your `python` command points to older version, use `python3` instead.
 
 ## Usage
-The main functionality of this program is calculating the total size of a source code.
-You need to specify the directory that contains the source code and ...
 
-You can run this program directly from the command line, see the help message below.
+Below, you can see list of all possible arguments (you can also get the help by running `python code_size_counter.py -h`). `Directory` and `extension` are the only
+ones that are required.
 
 ```
 usage: code_size_counter.py [-h] -d DIRECTORY -e EXTENSION [EXTENSION ...] [-l] [-x EXCLUDE [EXCLUDE ...]] [-p {kb_size,lines,files}]
@@ -24,23 +36,17 @@ optional arguments:
                         extensions of the files that we're searching (separated by spaces)
   -l, --log             If present, the program prints its progress (e.g. 'file XXX processed')
   -x EXCLUDE [EXCLUDE ...], --exclude EXCLUDE [EXCLUDE ...]
-                        path to directories & files to exclude (separated by spaces). These paths are relative to the given directory (-d parameter)
+                        paths to directories & files (separated by spaces) to exclude from search. These paths are relative to the given directory (-d parameter).
   -p {kb_size,lines,files}, --print {kb_size,lines,files}
                         Print just the selected value (kB size, total files or lines of code)
 ```
 
-Required arguments are:
-- -d DIRECTORY
-- -e EXTENSION
-
-To show the help, use the following command
-```shell
-python code_size_counter.py -h
-```
-
+The typical usage of this program looks like this (see below). In this case, we're looking for `py` files in `C:/Users/hacker123/Documents/hacking_app` directory
+except those in `.venv` and `.git` subdirectories.
+Note that we don't prefix the file extensions with a dot (e.g. use `py` instead of `.py`).
 
 ```shell
-python code_size_counter.py -d C:/Users/hacker123/Documents/hacking_app -e py
+python code_size_counter.py -d C:/Users/hacker123/Documents/hacking_app -e py -x .venv .git
 ```
 Possible output
 ```
@@ -50,8 +56,8 @@ Total size of .py files: 9.47 kB
 Total lines of code: 615
 ============================================================
 ```
-
 See also other examples below.
+
 ### Examples
 #### Example 1
 Calculate the size of `.py` files inside `./tests/complex-test-dir` directory.
@@ -154,6 +160,7 @@ I copied 268 lines from StackOverflow.
 
 - [src](./src) folder - source code files of the program
 - [tests](./tests) folder - unit tests of the program (using `Python unittest` module). The subfolders serve as a test data.
+- [code_size_counter.py](code_size_counter.py) is the entry-point of the app
 
 To run the tests, use the following command
 ```shell
