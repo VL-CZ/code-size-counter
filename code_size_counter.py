@@ -32,7 +32,7 @@ def config_args():
     :return: parsed script arguments
     """
     parser = ArgumentParser(
-        description='Calculate the total size (both kB and lines of code) of program\'s code.')
+        description='Calculate the total size (both KB and lines of code) of program\'s code.')
     parser.add_argument('-d', '--directory', type=str, required=True,
                         help='Path to the directory where to search files. The path can be either absolute or '
                              'relative.')
@@ -45,7 +45,7 @@ def config_args():
                         help='path to directories & files to exclude (separated by spaces). These paths are relative '
                              'to the given directory (-d parameter)')
     parser.add_argument('-p', '--print', choices=['kb_size', 'lines', 'files'],
-                        help='Print just the selected value (kB size, total files or lines of code)')
+                        help='Print just the selected value (KB size, total files or lines of code)')
     return parser.parse_args()
 
 
@@ -72,7 +72,7 @@ def main():
         print(
             f'Total {format_extensions(file_extensions)} files: {code_size.total_files}')
         print(
-            f'Total size of {format_extensions(file_extensions)} files: {format_to_kilobytes(code_size.total_size)} kB')
+            f'Total size of {format_extensions(file_extensions)} files: {format_to_kilobytes(code_size.total_size)} KB')
         print(f'Total lines of code: {code_size.total_lines}')
         print('=' * 60)
 

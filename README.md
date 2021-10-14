@@ -1,6 +1,6 @@
 # Source code size counter
 This repository contains a simple command line script used for calculating total size (both 
-kB and lines of code) of program's code.
+KB and lines of code) of program's code.
 
 ## Introduction
 The main goal of this program is to calculate total size of a source code.
@@ -11,7 +11,7 @@ The script then searches the directory for files with the given file extension. 
 The program typically prints:
 - number of files found
 - total number of lines in these files (newline at the end of the file isn't counted)
-- total size of these files in kB (rounded to 2 decimal places)
+- total size of these files in KB (rounded to 2 decimal places). 1 KB = 1024 bytes
 
 See the usage section for further details.
 
@@ -26,7 +26,7 @@ ones that are required.
 ```
 usage: code_size_counter.py [-h] -d DIRECTORY -e EXTENSION [EXTENSION ...] [-l] [-x EXCLUDE [EXCLUDE ...]] [-p {kb_size,lines,files}]
 
-Calculate the total size (both kB and lines of code) of program's code.
+Calculate the total size (both KB and lines of code) of program's code.
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -38,7 +38,7 @@ optional arguments:
   -x EXCLUDE [EXCLUDE ...], --exclude EXCLUDE [EXCLUDE ...]
                         path to directories & files to exclude (separated by spaces). These paths are relative to the given directory (-d parameter)     
   -p {kb_size,lines,files}, --print {kb_size,lines,files}
-                        Print just the selected value (kB size, total files or lines of code)
+                        Print just the selected value (KB size, total files or lines of code)
 ```
 
 The typical usage of this program looks like this (see below). In this case, we're looking for `py` files in `C:/Users/hacker123/Documents/hacking_app` directory
@@ -52,7 +52,7 @@ Possible output
 ```
 ============================================================
 Total .py files: 3
-Total size of .py files: 9.47 kB
+Total size of .py files: 9.47 KB
 Total lines of code: 615
 ============================================================
 ```
@@ -69,7 +69,7 @@ Output
 ```
 ============================================================
 Total .py files: 31
-Total size of .py files: 462.61 kB
+Total size of .py files: 462.61 KB
 Total lines of code: 13030
 ============================================================
 ```
@@ -83,7 +83,7 @@ Output
 ```
 ============================================================
 Total .py files: 8
-Total size of .py files: 8.26 kB
+Total size of .py files: 8.26 KB
 Total lines of code: 268
 ============================================================
 ```
@@ -105,7 +105,7 @@ Output
 ./tests/complex-test-dir/code_size_counter.py processed
 ============================================================      
 Total .py files: 8
-Total size of .py files: 8.26 kB
+Total size of .py files: 8.26 KB
 Total lines of code: 268
 ============================================================      
 ```
@@ -129,7 +129,7 @@ Output:
 ./tests/complex-test-dir/README.md processed
 ============================================================
 Total .py, .md, .yml files: 10
-Total size of .py, .md, .yml files: 9.56 kB
+Total size of .py, .md, .yml files: 9.56 KB
 Total lines of code: 307
 ============================================================
 ```
