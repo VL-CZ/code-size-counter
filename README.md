@@ -68,7 +68,7 @@ For further info, see the [documentation](https://docs.microsoft.com/en-us/power
 
 ```powershell
 function run_code_size_counter {
-    python {ABSOLUTE_PATH_TO_THE_SCRIPT_FOLDER}/code_size_counter.py $args
+    python {ABSOLUTE_PATH_TO_THE_SCRIPT_FOLDER}\code_size_counter.py $args
 }
 
 New-Alias code_size_counter run_code_size_counter
