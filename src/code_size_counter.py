@@ -58,13 +58,16 @@ class CodeSizeCounter:
             ) or self._is_excluded(file_path):
                 continue
 
-            file_size = FileSetSize(
-                file_manager.get_size(), file_manager.get_lines_count(), 1
-            )
-            file_set_size.add(file_size)
+            try:
+                file_size = FileSetSize(
+                    file_manager.get_size(), file_manager.get_lines_count(), 1
+                )
+                file_set_size.add(file_size)
 
-            if self._print_logs:
-                print(f"{get_path_with_slashes(file_path)} processed")
+                if self._print_logs:
+                    print(f"{get_path_with_slashes(file_path)} processed")
+            except UnicodeDecodeError:  # ignore files that can't be opened (most likely binary files)
+                continue
 
         return file_set_size
 
