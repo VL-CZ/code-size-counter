@@ -14,7 +14,9 @@ class TestCodeSizeCounter(unittest.TestCase):
         """
         a simple test case - no items to exclude, single file extension
         """
-        code_size_counter = CodeSizeCounter(os.path.join(_get_tests_dir(), 'simple-test-dir'), ('txt',), False, ())
+        code_size_counter = CodeSizeCounter(
+            os.path.join(_get_tests_dir(), "simple-test-dir"), ("txt",), False, ()
+        )
         code_size = code_size_counter.calculate_size()
 
         self.assertEqual(3, code_size.total_files)
@@ -25,11 +27,17 @@ class TestCodeSizeCounter(unittest.TestCase):
         """
         complex test case - allowed multiple (however not all) file extensions, excluding folders & files
         """
-        excluded_items = map(lambda ex: os.path.join(_get_tests_dir(), 'complex-test-dir', ex),
-                             [os.path.join('src', 'module2', 'main.py'), 'virtualenv'])
+        excluded_items = map(
+            lambda ex: os.path.join(_get_tests_dir(), "complex-test-dir", ex),
+            [os.path.join("src", "module2", "main.py"), "virtualenv"],
+        )
 
-        code_size_counter = CodeSizeCounter(os.path.join(_get_tests_dir(), 'complex-test-dir'), ('py', 'yml', 'md'),
-                                            False, tuple(excluded_items))
+        code_size_counter = CodeSizeCounter(
+            os.path.join(_get_tests_dir(), "complex-test-dir"),
+            ("py", "yml", "md"),
+            False,
+            tuple(excluded_items),
+        )
         code_size = code_size_counter.calculate_size()
 
         self.assertEqual(13, code_size.total_files)
@@ -40,11 +48,17 @@ class TestCodeSizeCounter(unittest.TestCase):
         """
         test case with excluding directories
         """
-        excluded_directories = map(lambda ex: os.path.join(_get_tests_dir(), 'exclude-test-dir', ex),
-                                   [os.path.join('dir', 'dir-ex2'), 'dir-ex'])
+        excluded_directories = map(
+            lambda ex: os.path.join(_get_tests_dir(), "exclude-test-dir", ex),
+            [os.path.join("dir", "dir-ex2"), "dir-ex"],
+        )
 
-        code_size_counter = CodeSizeCounter(os.path.join(_get_tests_dir(), 'exclude-test-dir'), ('py',), False,
-                                            tuple(excluded_directories))
+        code_size_counter = CodeSizeCounter(
+            os.path.join(_get_tests_dir(), "exclude-test-dir"),
+            ("py",),
+            False,
+            tuple(excluded_directories),
+        )
         code_size = code_size_counter.calculate_size()
 
         self.assertEqual(2, code_size.total_files)
@@ -55,10 +69,12 @@ class TestCodeSizeCounter(unittest.TestCase):
         """
         test case that doesn't find any suitable files
         """
-        code_size_counter = CodeSizeCounter(os.path.join(_get_tests_dir(), 'no-matching-files-test-dir'), ('py',),
-                                            False,
-                                            (os.path.join(_get_tests_dir(), 'no-matching-files-test-dir', 'dir-py'),)
-                                            )
+        code_size_counter = CodeSizeCounter(
+            os.path.join(_get_tests_dir(), "no-matching-files-test-dir"),
+            ("py",),
+            False,
+            (os.path.join(_get_tests_dir(), "no-matching-files-test-dir", "dir-py"),),
+        )
         code_size = code_size_counter.calculate_size()
 
         self.assertEqual(0, code_size.total_files)
@@ -73,5 +89,5 @@ def _get_tests_dir():
     return Path(__file__).parent.absolute()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

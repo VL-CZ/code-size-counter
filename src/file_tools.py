@@ -60,7 +60,7 @@ class FileManager:
         """
         get number of lines in the file
         """
-        with open(self.file_path, 'r') as file:
+        with open(self.file_path, "r") as file:
             return sum(1 for _ in file)
 
     def has_one_of_extensions(self, extensions):
@@ -77,11 +77,11 @@ class FileManager:
 
         :param extension: given file extension (e.g. '.py')
         """
-        return self.file_path.endswith(f'.{extension}')
+        return self.file_path.endswith(f".{extension}")
 
 
 def get_path_with_slashes(path):
     """
     get path using forward slashes (e.g. replace back-slash by forward slash on Windows)
     """
-    return path.replace('\\', '/')
+    return path.replace("\\", "/")

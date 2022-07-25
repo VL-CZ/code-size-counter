@@ -53,14 +53,18 @@ class CodeSizeCounter:
         for file in files:  # add the size of all files
             file_path = os.path.join(directory, file)
             file_manager = FileManager(file_path)
-            if (not file_manager.has_one_of_extensions(self._file_extensions)) or self._is_excluded(file_path):
+            if (
+                not file_manager.has_one_of_extensions(self._file_extensions)
+            ) or self._is_excluded(file_path):
                 continue
 
-            file_size = FileSetSize(file_manager.get_size(), file_manager.get_lines_count(), 1)
+            file_size = FileSetSize(
+                file_manager.get_size(), file_manager.get_lines_count(), 1
+            )
             file_set_size.add(file_size)
 
             if self._print_logs:
-                print(f'{get_path_with_slashes(file_path)} processed')
+                print(f"{get_path_with_slashes(file_path)} processed")
 
         return file_set_size
 
@@ -81,6 +85,8 @@ class CodeSizeCounter:
         if not all_paths_exist:
             invalid_paths = map(
                 get_path_with_slashes,
-                filter(lambda path: not os.path.exists(path), all_paths)
+                filter(lambda path: not os.path.exists(path), all_paths),
             )
-            raise FileNotFoundError(f'The following paths are not valid {list(invalid_paths)}')
+            raise FileNotFoundError(
+                f"The following paths are not valid {list(invalid_paths)}"
+            )
