@@ -11,9 +11,9 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
+    env:
+      SOURCE_FILES: src tests/test_code_size_counter.py code_size_counter.py
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python 3.9
@@ -25,10 +25,9 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     - name: Check formatting
-      run: black --check src tests/test_code_size_counter.py code_size_counter.py
+      run: black --check $SOURCE_FILES
     - name: Lint with flake8
-      run: |
-        flake8 src tests/test_code_size_counter.py code_size_counter.py
+      run: flake8 $SOURCE_FILES
     - name: Test with unittest module
       run: |
         python -m unittest discover tests -v
