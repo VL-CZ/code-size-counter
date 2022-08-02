@@ -46,7 +46,7 @@ except those in `.venv` and `.git` subdirectories.
 Note that we don't prefix the file extensions with a dot (e.g. use `py` instead of `.py`).
 
 ```shell
-python main.py -d C:/Users/hacker123/Documents/hacking_app -e py -x .venv .git
+python program.py -d C:/Users/hacker123/Documents/hacking_app -e py -x .venv .git
 ```
 Possible output
 ```
@@ -78,7 +78,7 @@ New-Alias code_size_counter run_code_size_counter
 Add this line to `~/.bashrc` file.
 
 ```bash
-alias code_size_counter='python {ABSOLUTE_PATH_TO_THE_SCRIPT_FOLDER}/main.py'
+alias code_size_counter='python {ABSOLUTE_PATH_TO_THE_SCRIPT_FOLDER}/program.py'
 ```
 
 ### Examples
@@ -86,7 +86,7 @@ alias code_size_counter='python {ABSOLUTE_PATH_TO_THE_SCRIPT_FOLDER}/main.py'
 Calculate the size of `.py` files inside `./tests/complex-test-dir` directory.
 
 ```shell
-python main.py -d ./tests/complex-test-dir -e py
+python program.py -d ./tests/complex-test-dir -e py
 ```
 Output
 ```
@@ -100,7 +100,7 @@ Total lines of code: 13030
 #### Example 2
 Calculate the size of `.py` files inside `./tests/complex-test-dir` directory. Exclude `virtualenv` and `src/module1` subdirectories.
 ```shell
-python main.py -d ./tests/complex-test-dir -e py -x virtualenv src/module1
+python program.py -d ./tests/complex-test-dir -e py -x virtualenv src/module1
 ```
 Output
 ```
@@ -114,7 +114,7 @@ Total lines of code: 268
 #### Example 3
 Calculate the size of `.py` files inside `./tests/complex-test-dir` directory. Exclude `virtualenv` and `src/module1` subdirectories and print logs.
 ```shell
-python main.py -d ./tests/complex-test-dir -e py -x virtualenv src/module1 -l
+python program.py -d ./tests/complex-test-dir -e py -x virtualenv src/module1 -l
 ```
 Output
 ```
@@ -136,7 +136,7 @@ Total lines of code: 268
 #### Example 4
 Calculate the size of `.py`, `.md` and `.yml` files inside `./tests/complex-test-dir` directory. Exclude `virtualenv` and `src/module1` subdirectories and print logs.
 ```shell
-python main.py -d ./tests/complex-test-dir -e py md yml -x virtualenv src/module1 -l
+python program.py -d ./tests/complex-test-dir -e py md yml -x virtualenv src/module1 -l
 ```
 Output:
 ```
@@ -161,7 +161,7 @@ Total lines of code: 307
 Calculate the size of `.py` files inside `./tests/complex-test-dir` directory. Exclude `virtualenv` and `src/module1` subdirectories 
 and print just the number of lines.
 ```shell
-python main.py -d ./tests/complex-test-dir -e py -x virtualenv src/module1 -p lines
+python program.py -d ./tests/complex-test-dir -e py -x virtualenv src/module1 -p lines
 ```
 
 Output:
@@ -171,7 +171,7 @@ Output:
 
 You can then pipe the result (as you can see on the example below).
 ```shell
-python main.py -d ./tests/complex-test-dir -e py -x virtualenv src/module1 -p lines | python -c "loc = input(); print(f'I copied {loc} lines from StackOverflow.')"
+python program.py -d ./tests/complex-test-dir -e py -x virtualenv src/module1 -p lines | python -c "loc = input(); print(f'I copied {loc} lines from StackOverflow.')"
 ```
 Output
 ```
@@ -183,7 +183,7 @@ I copied 268 lines from StackOverflow.
 
 - [src](./src) folder - source code files of the program
 - [tests](./tests) folder - unit tests of the program (using `Python unittest` module). The subfolders serve as a test data.
-- [code_size_counter.py](main.py) is the entry-point of the app
+- [code_size_counter.py](program.py) is the entry-point of the app
 
 To run the tests, use the following command
 ```shell

@@ -23,4 +23,4 @@ classifiers = [
 "Bug Tracker" = "https://github.com/VL-CZ/source-code-size-counter/issues"
 
 [project.scripts]
-code_size_counter = "main:main"
+code_size_counter = "program:main"
