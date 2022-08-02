@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=61.0"]
+requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -21,3 +21,6 @@ classifiers = [
 [project.urls]
 "Homepage" = "https://github.com/VL-CZ/source-code-size-counter"
 "Bug Tracker" = "https://github.com/VL-CZ/source-code-size-counter/issues"
+
+[project.scripts]
+code_size_counter = "main:main"
