@@ -3,12 +3,12 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "example_package_YOUR_USERNAME_HERE"
+name = "source_code_size_counter"
 version = "1.0"
 authors = [
-  { name="Example Author", email="author@example.com" },
+  { name="Vojtěch Lengál", email="vojta.lengal@gmail.com" },
 ]
-description = "A small example package"
+description = "Command line script used for calculating total size (both KB and lines of code) of program's code."
 readme = "README.md"
 license = { file="LICENSE" }
 requires-python = ">=3.7"
@@ -19,5 +19,5 @@ classifiers = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/pypa/sampleproject"
-"Bug Tracker" = "https://github.com/pypa/sampleproject/issues"
+"Homepage" = "https://github.com/VL-CZ/source-code-size-counter"
+"Bug Tracker" = "https://github.com/VL-CZ/source-code-size-counter/issues"
