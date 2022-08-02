@@ -41,7 +41,7 @@ def config_args():
         type=str,
         required=True,
         help="Path to the directory where to search files. The path can be either absolute or "
-             "relative.",
+        "relative.",
     )
     parser.add_argument(
         "-e",
@@ -50,7 +50,7 @@ def config_args():
         required=True,
         default=[],
         help="extensions of the files that we're searching (separated by spaces). Do not prefix them "
-             'with a dot (e.g. use "py" instead of ".py")',
+        'with a dot (e.g. use "py" instead of ".py")',
     )
     parser.add_argument(
         "-l",
@@ -65,7 +65,7 @@ def config_args():
         nargs="+",
         default=[],
         help="path to directories & files to exclude (separated by spaces). These paths are relative "
-             "to the given directory (-d parameter)",
+        "to the given directory (-d parameter)",
     )
     parser.add_argument(
         "-p",
