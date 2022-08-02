@@ -16,15 +16,24 @@ The program typically prints:
 See the usage section for further details.
 
 ## Requirements
-- Python version 3. If your `python` command points to older version, use `python3` instead.
+- Python version 3
+- pip
+
+## Installation
+Run
+```shell
+pip install git+https://github.com/VL-CZ/source-code-size-counter
+```
+
+This installs the program as a local python package and allows you to use `code_size_counter` CLI command.
 
 ## Usage
 
-Below, you can see list of all possible arguments (you can also get the help by running `python code_size_counter.py -h`). `Directory` and `extension` are the only
+Below, you can see list of all possible arguments (you can also get the help by running `code_size_counter -h`). `Directory` and `extension` are the only
 ones that are required.
 
 ```
-usage: code_size_counter.py [-h] -d DIRECTORY -e EXTENSION [EXTENSION ...] [-l] [-x EXCLUDE [EXCLUDE ...]] [-p {kb_size,lines,files}]
+usage: code_size_counter [-h] -d DIRECTORY -e EXTENSION [EXTENSION ...] [-l] [-x EXCLUDE [EXCLUDE ...]] [-p {kb_size,lines,files}]
 
 Calculate the total size (both KB and lines of code) of program's code.
 
@@ -46,7 +55,7 @@ except those in `.venv` and `.git` subdirectories.
 Note that we don't prefix the file extensions with a dot (e.g. use `py` instead of `.py`).
 
 ```shell
-python program.py -d C:/Users/hacker123/Documents/hacking_app -e py -x .venv .git
+code_size_counter -d C:/Users/hacker123/Documents/hacking_app -e py -x .venv .git
 ```
 Possible output
 ```
@@ -62,31 +71,13 @@ See also other examples below.
 You can also create PowerShell/Bash alias for this script. 
 Then, you can just type `code_size_counter` instead of `python {folder_with_the_script}/code_size_counter.py` to run this script.
 
-#### PowerShell
-Add these lines to your PowerShell profile file (it's usually located in `~\Documents\PowerShell\Profile.ps1`). 
-For further info, see the [documentation](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_profiles)
-
-```powershell
-function run_code_size_counter {
-    python {ABSOLUTE_PATH_TO_THE_SCRIPT_FOLDER}\code_size_counter.py $args
-}
-
-New-Alias code_size_counter run_code_size_counter
-```
-
-#### Bash
-Add this line to `~/.bashrc` file.
-
-```bash
-alias code_size_counter='python {ABSOLUTE_PATH_TO_THE_SCRIPT_FOLDER}/program.py'
-```
 
 ### Examples
 #### Example 1
 Calculate the size of `.py` files inside `./tests/complex-test-dir` directory.
 
 ```shell
-python program.py -d ./tests/complex-test-dir -e py
+code_size_counter -d ./tests/complex-test-dir -e py
 ```
 Output
 ```
@@ -100,7 +91,7 @@ Total lines of code: 13030
 #### Example 2
 Calculate the size of `.py` files inside `./tests/complex-test-dir` directory. Exclude `virtualenv` and `src/module1` subdirectories.
 ```shell
-python program.py -d ./tests/complex-test-dir -e py -x virtualenv src/module1
+code_size_counter -d ./tests/complex-test-dir -e py -x virtualenv src/module1
 ```
 Output
 ```
@@ -114,7 +105,7 @@ Total lines of code: 268
 #### Example 3
 Calculate the size of `.py` files inside `./tests/complex-test-dir` directory. Exclude `virtualenv` and `src/module1` subdirectories and print logs.
 ```shell
-python program.py -d ./tests/complex-test-dir -e py -x virtualenv src/module1 -l
+code_size_counter -d ./tests/complex-test-dir -e py -x virtualenv src/module1 -l
 ```
 Output
 ```
@@ -136,7 +127,7 @@ Total lines of code: 268
 #### Example 4
 Calculate the size of `.py`, `.md` and `.yml` files inside `./tests/complex-test-dir` directory. Exclude `virtualenv` and `src/module1` subdirectories and print logs.
 ```shell
-python program.py -d ./tests/complex-test-dir -e py md yml -x virtualenv src/module1 -l
+code_size_counter -d ./tests/complex-test-dir -e py md yml -x virtualenv src/module1 -l
 ```
 Output:
 ```
@@ -161,7 +152,7 @@ Total lines of code: 307
 Calculate the size of `.py` files inside `./tests/complex-test-dir` directory. Exclude `virtualenv` and `src/module1` subdirectories 
 and print just the number of lines.
 ```shell
-python program.py -d ./tests/complex-test-dir -e py -x virtualenv src/module1 -p lines
+code_size_counter -d ./tests/complex-test-dir -e py -x virtualenv src/module1 -p lines
 ```
 
 Output:
@@ -171,7 +162,7 @@ Output:
 
 You can then pipe the result (as you can see on the example below).
 ```shell
-python program.py -d ./tests/complex-test-dir -e py -x virtualenv src/module1 -p lines | python -c "loc = input(); print(f'I copied {loc} lines from StackOverflow.')"
+code_size_counter -d ./tests/complex-test-dir -e py -x virtualenv src/module1 -p lines | python -c "loc = input(); print(f'I copied {loc} lines from StackOverflow.')"
 ```
 Output
 ```
@@ -181,11 +172,16 @@ I copied 268 lines from StackOverflow.
 ## Developer documentation
 ### Program structure
 
-- [src](./src) folder - source code files of the program
+- [source_code_size_counter](./source_code_size_counter/) folder - source code files of the program
+  - [main.py](source_code_size_counter/main.py) is the entry-point of the app
 - [tests](./tests) folder - unit tests of the program (using `Python unittest` module). The subfolders serve as a test data.
-- [code_size_counter.py](program.py) is the entry-point of the app
 
 To run the tests, use the following command
 ```shell
 python -m unittest discover tests -v
+```
+
+Run this command in the **root** folder to execute `main.py` as a script.
+```shell
+python -m source_code_size_counter.main
 ```
