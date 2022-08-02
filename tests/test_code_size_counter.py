@@ -2,7 +2,7 @@ import os
 import unittest
 from pathlib import Path
 
-from src.code_size_counter import CodeSizeCounter
+from source_code_size_counter.code_size_counter import CodeSizeCounter
 
 
 class TestCodeSizeCounter(unittest.TestCase):

@@ -1,6 +1,6 @@
 import os
 
-from src.file_tools import FileSetSize, FileManager, get_path_with_slashes
+from source_code_size_counter.file_tools import FileSetSize, FileManager, get_path_with_slashes
 
 
 class CodeSizeCounter:
@@ -54,7 +54,7 @@ class CodeSizeCounter:
             file_path = os.path.join(directory, file)
             file_manager = FileManager(file_path)
             if (
-                not file_manager.has_one_of_extensions(self._file_extensions)
+                    not file_manager.has_one_of_extensions(self._file_extensions)
             ) or self._is_excluded(file_path):
                 continue
 
