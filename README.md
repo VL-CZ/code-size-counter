@@ -67,11 +67,6 @@ Total lines of code: 615
 ```
 See also other examples below.
 
-### Add alias for this script
-You can also create PowerShell/Bash alias for this script. 
-Then, you can just type `code_size_counter` instead of `python {folder_with_the_script}/code_size_counter.py` to run this script.
-
-
 ### Examples
 #### Example 1
 Calculate the size of `.py` files inside `./tests/complex-test-dir` directory.
