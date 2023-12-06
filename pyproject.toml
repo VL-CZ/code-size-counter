@@ -1,26 +1,16 @@
-[build-system]
-requires = ["setuptools"]
-build-backend = "setuptools.build_meta"
-
-[project]
-name = "source-code-size-counter"
+[tool.poetry]
+name = "code-size-counter"
 version = "1.0"
-authors = [
-  { name="Vojtěch Lengál", email="vojta.lengal@gmail.com" },
-]
-description = "Command line script used for calculating total size (both KB and lines of code) of program's code."
+description = "Command line utility used for calculating total size (both KB and lines of code) of program's code."
+authors = ["Vojtěch Lengál <vojta.lengal@gmail.com>"]
 readme = "README.md"
-license = { file="LICENSE" }
-requires-python = ">=3.7"
-classifiers = [
-    "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: MIT License",
-    "Operating System :: OS Independent",
-]
 
-[project.urls]
-"Homepage" = "https://github.com/VL-CZ/source-code-size-counter"
-"Bug Tracker" = "https://github.com/VL-CZ/source-code-size-counter/issues"
+[tool.poetry.dependencies]
+python = "^3.8"
+black = "^23.11.0"
+prettytable = "^3.9.0"
 
-[project.scripts]
-code_size_counter = "source_code_size_counter.main:main"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
