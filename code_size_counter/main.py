@@ -100,8 +100,7 @@ def main():
     elif what_to_print == "files":
         print(file_sizes.total_files)
     else:
-        # print all
-
+        # create results table
         results_table = PrettyTable()
         results_table.field_names = ["Extension", "Total files", "Total lines", "Total size (KB)"]
         results_table.vrules = FRAME
@@ -114,6 +113,8 @@ def main():
             results_table.add_row([format_extension(ext), size.total_files, size.total_lines, format_to_kilobytes(size.total_size)], divider=is_last_index)
                                   
         results_table.add_row(["TOTAL", total_sizes.total_files, total_sizes.total_lines, format_to_kilobytes(total_sizes.total_size)])
+        
+        # print the table
         print(results_table)
 
 

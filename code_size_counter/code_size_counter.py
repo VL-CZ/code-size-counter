@@ -1,6 +1,6 @@
 import os
 
-from source_code_size_counter.file_tools import (
+from code_size_counter.file_tools import (
     FileSetSize,
     FileManager,
     get_path_with_slashes,
@@ -21,16 +21,21 @@ class CodeSizeCounter:
         """
         self._directory = directory
         self._file_extensions = file_extensions
+        self._include_all_files = file_extensions == ()
         self._print_logs = print_logs
         self._excluded_items = excluded_items
+        self._sizes_dict = {}
 
         self._check_if_paths_exist()
 
     def calculate_size(self):
         """
         count lines, size (in bytes) and number of files in the directory with the selected file extension
+
+        :return: dictionary, whose keys are file extensions and values are corresponding FileSetSize objects
         """
-        return self._calculate_size(self._directory)
+        self._calculate_size(self._directory)
+        return self._sizes_dict
 
     def _calculate_size(self, directory):
         """
@@ -41,24 +46,22 @@ class CodeSizeCounter:
 
         # if it's in excluded files/directories, return
         if self._is_excluded(directory):
-            return FileSetSize.empty()
+            return
 
         items = os.listdir(directory)
         files = [f for f in items if os.path.isfile(os.path.join(directory, f))]
         directories = [d for d in items if os.path.isdir(os.path.join(directory, d))]
 
-        file_set_size = FileSetSize.empty()
-
         for sub_dir in directories:  # add the size of all subdirs
             directory_path = os.path.join(directory, sub_dir)
-            directory_size = self._calculate_size(directory_path)
-            file_set_size.add(directory_size)
+            self._calculate_size(directory_path)
 
         for file in files:  # add the size of all files
             file_path = os.path.join(directory, file)
             file_manager = FileManager(file_path)
             if (
-                not file_manager.has_one_of_extensions(self._file_extensions)
+                not self._include_all_files
+                and not file_manager.has_one_of_extensions(self._file_extensions)
             ) or self._is_excluded(file_path):
                 continue
 
@@ -66,14 +69,24 @@ class CodeSizeCounter:
                 file_size = FileSetSize(
                     file_manager.get_size(), file_manager.get_lines_count(), 1
                 )
-                file_set_size.add(file_size)
+
+                ext = file_manager.get_extension()
+
+                # Add to sizes_dict
+                self._add_file_size(file_size, ext)
 
                 if self._print_logs:
                     print(f"{get_path_with_slashes(file_path)} processed")
-            except UnicodeDecodeError:  # ignore files that can't be opened (most likely binary files)
-                continue
+            except UnicodeDecodeError: # Ignore binary files and other ones that can't be decoded
+                if self._print_logs:
+                    print(f"Skipping {get_path_with_slashes(file_path)} , which can't be opened in read mode")
 
-        return file_set_size
+    def _add_file_size(self, file_set_size ,file_extension):
+        """
+        Add file set size to `_sizes_dict` dictionary
+        """
+        new_size = self._sizes_dict[file_extension] + file_set_size if file_extension in self._sizes_dict else file_set_size
+        self._sizes_dict[file_extension] = new_size
 
     def _is_excluded(self, path):
         """
