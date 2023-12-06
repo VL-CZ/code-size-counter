@@ -10,24 +10,31 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  ci:
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+        poetry-version: ["1.7.1"]
     runs-on: ubuntu-latest
     env:
       SOURCE_FILES: source_code_size_counter tests/test_code_size_counter.py
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Python 3.9
+    - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: 3.9
+        python-version: ${{ matrix.python-version }}
+    - name: Python Poetry Action
+      uses: abatilo/actions-poetry@v2.3.0      
+      with:
+        poetry-version: ${{ matrix.poetry-version }}
     - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
+      run: poetry install
     - name: Check formatting
-      run: black --check $SOURCE_FILES
+      run: poetry run black --check $SOURCE_FILES
     - name: Lint with flake8
-      run: flake8 $SOURCE_FILES
+      run: poetry run flake8 $SOURCE_FILES
     - name: Test with unittest module
       run: |
-        python -m unittest discover tests -v
+        poetry run python -m unittest discover tests -v
