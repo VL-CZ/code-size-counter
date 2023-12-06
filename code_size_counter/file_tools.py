@@ -40,7 +40,7 @@ class FileSetSize:
         return FileSetSize(
             self.total_files + other.total_files,
             self.total_lines + other.total_lines,
-            self.total_size + other.total_size
+            self.total_size + other.total_size,
         )
 
     def __add__(self, other):
