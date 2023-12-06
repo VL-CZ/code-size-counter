@@ -50,20 +50,20 @@ options:
                         Print just the selected value (KB size, total files or lines of code)
 ```
 
-The typical usage of this program looks like this (see below). In this case, we're looking for `.txt` and `.py` files in `C:/Users/hacker123/Documents/hacking_app` directory,
+The typical usage of this program looks like this (see below). In this case, we're looking for `.py` and `.txt` files in `C:/Users/hacker123/Documents/hacking_app` directory,
 except those in `.venv` and `.git` subdirectories.
 Note that we don't prefix the file extensions with a dot (e.g. use `py` instead of `.py`).
 
 ```shell
-code_size_counter -d C:/Users/hacker123/Documents/hacking_app -e txt py -x .venv .git
+code_size_counter -d C:/Users/hacker123/Documents/hacking_app -e py txt -x .venv .git
 ```
 Possible output
 ```
 +---------------------------------------------------------+
 | Extension   Total files   Total lines   Total size (KB) |
 +---------------------------------------------------------+
-|      .txt             1             2              0.03 |
 |       .py             1            50              1.51 |
+|      .txt             1             2              0.03 |
 +---------------------------------------------------------+
 |     TOTAL             2            52              1.54 |
 +---------------------------------------------------------+
