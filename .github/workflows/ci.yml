@@ -18,7 +18,7 @@ jobs:
         poetry-version: ["1.7.1"]
     runs-on: ubuntu-latest
     env:
-      SOURCE_FILES: source_code_size_counter tests/test_code_size_counter.py
+      SOURCE_FILES: code_size_counter tests/test_code_size_counter.py
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python
