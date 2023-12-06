@@ -15,3 +15,6 @@ flake8 = "^6.1.0"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+code_size_counter = "code_size_counter.main:main"

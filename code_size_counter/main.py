@@ -52,7 +52,7 @@ def config_args():
         nargs="+",
         default=[],
         help="extensions of the files that we're searching (separated by spaces). Do not prefix them "
-        'with a dot (e.g. use "py" instead of ".py")',
+        'with a dot (e.g. use "py" instead of ".py"). Leave empty if you search for all files regardless of their extension.',
     )
     parser.add_argument(
         "-l",
@@ -96,11 +96,11 @@ def main():
 
     what_to_print = args.print
     if what_to_print == "kb_size":
-        print(format_to_kilobytes(file_sizes.total_size))
+        print(format_to_kilobytes(total_sizes.total_size))
     elif what_to_print == "lines":
-        print(file_sizes.total_lines)
+        print(total_sizes.total_lines)
     elif what_to_print == "files":
-        print(file_sizes.total_files)
+        print(total_sizes.total_files)
     else:
         # create results table
         results_table = PrettyTable()
@@ -115,6 +115,9 @@ def main():
         for fn in results_table.field_names:
             results_table.align[fn] = "r"
 
+        # sort by file extension
+        file_sizes = dict(sorted(file_sizes.items()))
+
         for ext, size in file_sizes.items():
             is_last_index = ext == list(file_sizes.keys())[-1]
             results_table.add_row(
@@ -127,14 +130,15 @@ def main():
                 divider=is_last_index,
             )
 
-        results_table.add_row(
-            [
-                "TOTAL",
-                total_sizes.total_files,
-                total_sizes.total_lines,
-                format_to_kilobytes(total_sizes.total_size),
-            ]
-        )
+        if len(file_sizes) > 1:
+            results_table.add_row(
+                [
+                    "TOTAL",
+                    total_sizes.total_files,
+                    total_sizes.total_lines,
+                    format_to_kilobytes(total_sizes.total_size),
+                ]
+            )
 
         # print the table
         print(results_table)
