@@ -2,6 +2,7 @@ import os
 
 NO_EXTENSION_PLACEHOLDER = "(NONE)"
 
+
 class FileSetSize:
     """
     class representing
@@ -31,7 +32,11 @@ class FileSetSize:
         :param other:
         :return: New fileset size with corresponding fields summed
         """
-        return FileSetSize(self.total_size + other.total_size, self.total_lines + other.total_lines, self.total_files + other.total_files)
+        return FileSetSize(
+            self.total_size + other.total_size,
+            self.total_lines + other.total_lines,
+            self.total_files + other.total_files,
+        )
 
     def __add__(self, other):
         return self.add(other)
@@ -81,7 +86,7 @@ class FileManager:
         """
         path_after_dot = self.file_path.split(".")[-1]
 
-        if any(delim in path_after_dot for delim in ["/","\\"]):
+        if any(delim in path_after_dot for delim in ["/", "\\"]):
             return NO_EXTENSION_PLACEHOLDER
         else:
             return path_after_dot

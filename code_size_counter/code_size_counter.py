@@ -77,15 +77,23 @@ class CodeSizeCounter:
 
                 if self._print_logs:
                     print(f"{get_path_with_slashes(file_path)} processed")
-            except UnicodeDecodeError: # Ignore binary files and other ones that can't be decoded
+            except (
+                UnicodeDecodeError
+            ):  # Ignore binary files and other ones that can't be decoded
                 if self._print_logs:
-                    print(f"Skipping {get_path_with_slashes(file_path)} , which can't be opened in read mode")
+                    print(
+                        f"Skipping {get_path_with_slashes(file_path)} , which can't be opened in read mode"
+                    )
 
-    def _add_file_size(self, file_set_size ,file_extension):
+    def _add_file_size(self, file_set_size, file_extension):
         """
         Add file set size to `_sizes_dict` dictionary
         """
-        new_size = self._sizes_dict[file_extension] + file_set_size if file_extension in self._sizes_dict else file_set_size
+        new_size = (
+            self._sizes_dict[file_extension] + file_set_size
+            if file_extension in self._sizes_dict
+            else file_set_size
+        )
         self._sizes_dict[file_extension] = new_size
 
     def _is_excluded(self, path):
