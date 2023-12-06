@@ -3,6 +3,7 @@ import unittest
 from pathlib import Path
 
 from code_size_counter.code_size_counter import CodeSizeCounter
+from code_size_counter.file_tools import FileSetSize
 
 
 class TestCodeSizeCounter(unittest.TestCase):
@@ -19,9 +20,9 @@ class TestCodeSizeCounter(unittest.TestCase):
         )
         code_size = code_size_counter.calculate_size()
 
-        self.assertEqual(3, code_size.total_files)
-        self.assertEqual(2374, code_size.total_size)
-        self.assertEqual(35, code_size.total_lines)
+        expected_result = {"txt": FileSetSize(3, 35, 2374)}
+
+        self.assertDictEqual(expected_result, code_size)
 
     def test_calculate_size_complex(self):
         """
@@ -34,15 +35,22 @@ class TestCodeSizeCounter(unittest.TestCase):
 
         code_size_counter = CodeSizeCounter(
             os.path.join(_get_tests_dir(), "complex-test-dir"),
-            ("py", "yml", "md"),
+            ("py", "yml", "md", "txt"),
             False,
             tuple(excluded_items),
         )
         code_size = code_size_counter.calculate_size()
 
-        self.assertEqual(13, code_size.total_files)
-        self.assertEqual(9842, code_size.total_size)
-        self.assertEqual(309, code_size.total_lines)
+        expected_result = {
+            "py": FileSetSize(11, 270, 8511),
+            "yml": FileSetSize(1, 36, 1187),
+            "md": FileSetSize(1, 3, 144),
+        }
+
+        self.assertDictEqual(expected_result, code_size)
+        # self.assertEqual(13, code_size.total_files)
+        # self.assertEqual(9842, code_size.total_size)
+        # self.assertEqual(309, code_size.total_lines)
 
     def test_calculate_size_exclude_directories(self):
         """
@@ -61,9 +69,9 @@ class TestCodeSizeCounter(unittest.TestCase):
         )
         code_size = code_size_counter.calculate_size()
 
-        self.assertEqual(2, code_size.total_files)
-        self.assertEqual(104, code_size.total_size)
-        self.assertEqual(4, code_size.total_lines)
+        expected_result = {"py": FileSetSize(2, 4, 104)}
+
+        self.assertDictEqual(expected_result, code_size)
 
     def test_calculate_size_no_matching_files(self):
         """
@@ -77,9 +85,7 @@ class TestCodeSizeCounter(unittest.TestCase):
         )
         code_size = code_size_counter.calculate_size()
 
-        self.assertEqual(0, code_size.total_files)
-        self.assertEqual(0, code_size.total_size)
-        self.assertEqual(0, code_size.total_lines)
+        self.assertDictEqual({}, code_size)
 
 
 def _get_tests_dir():

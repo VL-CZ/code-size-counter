@@ -67,7 +67,7 @@ class CodeSizeCounter:
 
             try:
                 file_size = FileSetSize(
-                    file_manager.get_size(), file_manager.get_lines_count(), 1
+                    1, file_manager.get_lines_count(), file_manager.get_size()
                 )
 
                 ext = file_manager.get_extension()
