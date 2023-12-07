@@ -1,9 +1,15 @@
 [tool.poetry]
 name = "code-size-counter"
-version = "1.0"
+version = "1.0.0"
 description = "Command line utility used for calculating total size (both KB and lines of code) of program's code."
 authors = ["Vojtěch Lengál <vojta.lengal@gmail.com>"]
 readme = "README.md"
+license = "MIT"
+homepage = "https://github.com/VL-CZ/code-size-counter"
+repository = "https://github.com/VL-CZ/code-size-counter"
+documentation = "https://github.com/VL-CZ/code-size-counter"
+keywords = ["lines of code", "code size", "KB size"]
+
 
 [tool.poetry.dependencies]
 python = "^3.9"
@@ -17,4 +23,4 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-code_size_counter = "code_size_counter.main:main"
+code-size-counter = "code_size_counter.main:main"

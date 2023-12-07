@@ -1,3 +1,6 @@
+[![PyPI version](https://badge.fury.io/py/code-size-counter.svg)](https://badge.fury.io/py/code-size-counter)
+![GitHub Actions](https://github.com/VL-CZ/code-size-counter/actions/workflows/ci.yml/badge.svg)
+
 # Code size counter
 This repository contains a simple command line utility used for calculating total size (both 
 KB and lines of code) of program's code.
@@ -20,16 +23,18 @@ See the usage section for further details.
 - pip
 
 ## Installation
-Run
+Install via pip
 ```shell
-pip install git+https://github.com/VL-CZ/source-code-size-counter
+pip install code-size-counter
 ```
 
-This installs the program as a local python package and allows you to use `code_size_counter` CLI command.
+This installs the program as a local python package and allows you to use `code-size-counter` CLI command.
+
+See the [PyPI](https://pypi.org/project/code-size-counter/) page for release history.
 
 ## Usage
 
-Below, you can see list of all possible arguments (you can also get the help by running `code_size_counter -h`). `directory` is the only
+Below, you can see list of all possible arguments (you can also get the help by running `code-size-counter -h`). `directory` is the only
 one required.
 
 ```
@@ -55,7 +60,7 @@ except those in `.venv` and `.git` subdirectories.
 Note that we don't prefix the file extensions with a dot (e.g. use `py` instead of `.py`).
 
 ```shell
-code_size_counter -d C:/Users/hacker123/Documents/hacking_app -e py txt -x .venv .git
+code-size-counter -d C:/Users/hacker123/Documents/hacking_app -e py txt -x .venv .git
 ```
 Possible output
 ```
@@ -75,7 +80,7 @@ See also other examples below.
 Calculate the size of `.py` files inside `./tests/complex-test-dir` directory.
 
 ```shell
-code_size_counter -d ./tests/complex-test-dir -e py
+code-size-counter -d ./tests/complex-test-dir -e py
 ```
 Output
 ```
@@ -89,7 +94,7 @@ Output
 #### Example 2
 Calculate the size of `.py` files inside `./tests/complex-test-dir` directory. Exclude `virtualenv` and `src/module1` subdirectories.
 ```shell
-code_size_counter -d ./tests/complex-test-dir -e py -x virtualenv src/module1
+code-size-counter -d ./tests/complex-test-dir -e py -x virtualenv src/module1
 ```
 Output
 ```
@@ -103,7 +108,7 @@ Output
 #### Example 3
 Calculate the size of `.py` files inside `./tests/complex-test-dir` directory. Exclude `virtualenv` and `src/module1` subdirectories and print logs.
 ```shell
-code_size_counter -d ./tests/complex-test-dir -e py -x virtualenv src/module1 -l
+code-size-counter -d ./tests/complex-test-dir -e py -x virtualenv src/module1 -l
 ```
 Output
 ```
@@ -125,7 +130,7 @@ Output
 #### Example 4
 Calculate the size of `.py`, `.md` and `.yml` files inside `./tests/complex-test-dir` directory. Exclude `virtualenv` and `src/module1` subdirectories.
 ```shell
-code_size_counter -d ./tests/complex-test-dir -e py md yml -x virtualenv src/module1
+code-size-counter -d ./tests/complex-test-dir -e py md yml -x virtualenv src/module1
 ```
 Output
 ```
@@ -143,7 +148,7 @@ Output
 #### Example 5
 Calculate the size of all files (regardless of their extension) inside `./directories/my-dir` directory.
 ```shell
-code_size_counter -d ./directories/my-dir
+code-size-counter -d ./directories/my-dir
 ```
 
 Possible output
@@ -169,7 +174,7 @@ Also note the `(NONE)` extension, which means that the file has no extension
 Calculate the size of `.py` files inside `./tests/complex-test-dir` directory. Exclude `virtualenv` and `src/module1` subdirectories 
 and print just the number of lines.
 ```shell
-code_size_counter -d ./tests/complex-test-dir -e py -x virtualenv src/module1 -p lines
+code-size-counter -d ./tests/complex-test-dir -e py -x virtualenv src/module1 -p lines
 ```
 
 Output
@@ -179,7 +184,7 @@ Output
 
 You can then pipe the result (as you can see on the example below).
 ```shell
-code_size_counter -d ./tests/complex-test-dir -e py -x virtualenv src/module1 -p lines | python -c "loc = input(); print(f'I copied {loc} lines from StackOverflow.')"
+code-size-counter -d ./tests/complex-test-dir -e py -x virtualenv src/module1 -p lines | python -c "loc = input(); print(f'I copied {loc} lines from StackOverflow.')"
 ```
 Output
 ```
