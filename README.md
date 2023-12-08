@@ -209,5 +209,5 @@ poetry run python -m unittest discover tests -v
 
 Run this command in the **root** folder to execute `main.py` as a script.
 ```shell
-poetry run python -m source_code_size_counter.main
+poetry run python -m code_size_counter.main
 ```
