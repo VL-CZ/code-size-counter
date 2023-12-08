@@ -51,8 +51,8 @@ def config_args():
         "--extension",
         nargs="+",
         default=[],
-        help="extensions of the files that we're searching (separated by spaces). Do not prefix them "
-        'with a dot (e.g. use "py" instead of ".py"). Leave empty if you search for all files regardless of their extension.',
+        help="extensions of the files that we're searching (separated by spaces) for. Do not prefix them "
+        'with a dot (e.g. use "py" instead of ".py"). Leave empty if you want to search for all files regardless of their extension.',
     )
     parser.add_argument(
         "-l",
