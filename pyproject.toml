@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "code-size-counter"
-version = "1.0.1"
+version = "1.0.2"
 description = "Command line utility used for calculating total size (both KB and lines of code) of program's code."
 authors = ["Vojtěch Lengál <vojta.lengal@gmail.com>"]
 readme = "README.md"
