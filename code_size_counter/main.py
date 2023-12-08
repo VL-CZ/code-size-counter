@@ -42,9 +42,9 @@ def config_args():
         "-d",
         "--directory",
         type=str,
-        required=True,
+        default=".",
         help="Path to the directory where to search files. The path can be either absolute or "
-        "relative.",
+        "relative; leave empty if you want to search the current directory.",
     )
     parser.add_argument(
         "-e",

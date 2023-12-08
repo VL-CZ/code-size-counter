@@ -39,14 +39,14 @@ Below, you can see list of all possible arguments (you can also get the help by 
 one required.
 
 ```
-usage: main.py [-h] -d DIRECTORY [-e EXTENSION [EXTENSION ...]] [-l] [-x EXCLUDE [EXCLUDE ...]] [-p {kb_size,lines,files}]
+usage: main.py [-h] [-d DIRECTORY] [-e EXTENSION [EXTENSION ...]] [-l] [-x EXCLUDE [EXCLUDE ...]] [-p {kb_size,lines,files}]
 
 Calculate the total size (both KB and lines of code) of program's code.
 
 options:
   -h, --help            show this help message and exit
   -d DIRECTORY, --directory DIRECTORY
-                        Path to the directory where to search files. The path can be either absolute or relative.
+                        Path to the directory where to search files. The path can be either absolute or relative; leave empty if you want to search the current directory.
   -e EXTENSION [EXTENSION ...], --extension EXTENSION [EXTENSION ...]
                         extensions of the files that we're searching (separated by spaces) for. Do not prefix them with a dot (e.g. use "py" instead of ".py"). Leave empty if you want to search for all files regardless of their extension.
   -l, --log             If present, the program prints its progress (e.g. 'file XXX processed')
@@ -54,6 +54,7 @@ options:
                         path to directories & files to exclude (separated by spaces). These paths are relative to the given directory (-d parameter)
   -p {kb_size,lines,files}, --print {kb_size,lines,files}
                         Print just the selected value (KB size, total files or lines of code)
+PS C:\Users\vojta\Programming\misc\code-size-counter> 
 ```
 
 The typical usage of this program looks like this (see below). In this case, we're looking for `.py` and `.txt` files in `C:/Users/hacker123/Documents/hacking_app` directory,
