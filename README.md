@@ -1,4 +1,5 @@
-[![PyPI version](https://badge.fury.io/py/code-size-counter.svg)](https://badge.fury.io/py/code-size-counter)
+[![PyPI - Version](https://img.shields.io/pypi/v/code-size-counter)
+](https://pypi.org/project/code-size-counter/)
 ![GitHub Actions](https://github.com/VL-CZ/code-size-counter/actions/workflows/ci.yml/badge.svg)
 
 # Code size counter
