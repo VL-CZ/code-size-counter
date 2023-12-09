@@ -1,6 +1,5 @@
-[![PyPI - Version](https://img.shields.io/pypi/v/code-size-counter)
-](https://pypi.org/project/code-size-counter/)
-![GitHub Actions](https://github.com/VL-CZ/code-size-counter/actions/workflows/ci.yml/badge.svg)
+[![PyPI - Version](https://img.shields.io/pypi/v/code-size-counter)](https://pypi.org/project/code-size-counter/)
+[![GitHub Actions](https://github.com/VL-CZ/code-size-counter/actions/workflows/ci.yml/badge.svg)](https://github.com/VL-CZ/code-size-counter/actions)
 
 # Code size counter
 This repository contains a simple command line utility used for calculating total size (both 
